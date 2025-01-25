@@ -1,0 +1,7 @@
+﻿{
+  "udp_host": "your ip",
+  "udp_port": 9449,
+  "database_username": "username",
+  "database_password": "password",
+  "database_name":  "brawldatabase"
+}
