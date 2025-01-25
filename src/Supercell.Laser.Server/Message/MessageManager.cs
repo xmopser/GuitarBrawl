@@ -364,555 +364,556 @@
 
         private void AskForBattleEndReceived(AskForBattleEndMessage message)
         {
-            Heroes = new List<Hero>();
-            BattleEnd3vs3Message battleEnd3vs3 = new BattleEnd3vs3Message();
-            BattleEndSoloMessage battleEndSolo = new BattleEndSoloMessage();
-            OwnHomeDataMessage ohd = new OwnHomeDataMessage();
-            Hero hero = HomeMode.Avatar.GetHero(HomeMode.Home.CharacterId);
+            // Heroes = new List<Hero>();
+            // BattleEnd3vs3Message battleEnd3vs3 = new BattleEnd3vs3Message();
+            // BattleEndSoloMessage battleEndSolo = new BattleEndSoloMessage();
+            // OwnHomeDataMessage ohd = new OwnHomeDataMessage();
+            // Hero hero = HomeMode.Avatar.GetHero(HomeMode.Home.CharacterId);
 
-            if (hero.CharacterId == 16000000 + message.BrawlerID)
-            {
-                battleEnd3vs3.BrawlerTrophies = hero.Trophies;
-                battleEnd3vs3.BrawlerHighestTrophies = hero.HighestTrophies;
+            // if (hero.CharacterId == 16000000 + message.BrawlerID)
+            // {
+            //     battleEnd3vs3.BrawlerTrophies = hero.Trophies;
+            //     battleEnd3vs3.BrawlerHighestTrophies = hero.HighestTrophies;
 
-                battleEndSolo.BrawlerTrophies = hero.Trophies;
-                battleEndSolo.BrawlerHighestTrophies = hero.HighestTrophies;
-            }
+            //     battleEndSolo.BrawlerTrophies = hero.Trophies;
+            //     battleEndSolo.BrawlerHighestTrophies = hero.HighestTrophies;
+            // }
 
-            ohd.Home = Connection.Home;
-            ohd.Avatar = Connection.Avatar;
+            // ohd.Home = Connection.Home;
+            // ohd.Avatar = Connection.Avatar;
 
-            //message.ProgressiveQuests = homeMode.Home.Quests.UpdateQuestsProgress(m_gameModeVariation, player.CharacterId, player.Kills, player.Damage, player.Heals, homeMode.Home);
+            // //message.ProgressiveQuests = homeMode.Home.Quests.UpdateQuestsProgress(m_gameModeVariation, player.CharacterId, player.Kills, player.Damage, player.Heals, homeMode.Home);
             
-            if (message.players == 6)
-            {
-                battleEnd3vs3.battleResult = message.battleResult;
-                battleEnd3vs3.mathResult = message.mathResult;
+            // if (message.players == 6)
+            // {
+            //     battleEnd3vs3.battleResult = message.battleResult;
+            //     battleEnd3vs3.mathResult = message.mathResult;
 
-                battleEnd3vs3.BrawlerID = message.BrawlerID;
-                battleEnd3vs3.SkinID = message.SkinID;
+            //     battleEnd3vs3.BrawlerID = message.BrawlerID;
+            //     battleEnd3vs3.SkinID = message.SkinID;
 
-                battleEnd3vs3.Name = ohd.Avatar.Name;
-                battleEnd3vs3.Exp = ohd.Home.Exp;
-            }
-            if (message.players == 10)
-            {
-                battleEndSolo.battleResult = message.battleResult;
-                battleEndSolo.mathResult = message.mathResult;
+            //     battleEnd3vs3.Name = ohd.Avatar.Name;
+            //     battleEnd3vs3.Exp = ohd.Home.Exp;
+            // }
+            // if (message.players == 10)
+            // {
+            //     battleEndSolo.battleResult = message.battleResult;
+            //     battleEndSolo.mathResult = message.mathResult;
 
-                battleEndSolo.BrawlerID = message.BrawlerID;
-                battleEndSolo.SkinID = message.SkinID;
+            //     battleEndSolo.BrawlerID = message.BrawlerID;
+            //     battleEndSolo.SkinID = message.SkinID;
 
-                battleEndSolo.Name = ohd.Avatar.Name;
-                battleEndSolo.Exp = ohd.Home.Exp;
-            }
+            //     battleEndSolo.Name = ohd.Avatar.Name;
+            //     battleEndSolo.Exp = ohd.Home.Exp;
+            // }
 
-            if (message.players == 6)
-            {
-                if (battleEnd3vs3.BrawlerTrophies >= 0 && battleEnd3vs3.BrawlerTrophies <= 49)
-                {
-                    if (message.battleResult == 0)
-                    {
-                        battleEnd3vs3.TrophiesReward = 8;
-                        battleEnd3vs3.TokensReward = 35;
-                        hero.AddTrophies(battleEnd3vs3.TrophiesReward);
-                        ohd.Avatar.AddTokens(battleEnd3vs3.TokensReward);
-                        ohd.Home.Exp += 8;
-                        ohd.Avatar.TrioWins += 1;
-                    }
-                    else
-                    {
-                        battleEnd3vs3.TrophiesReward = 0;
-                        ohd.Home.Exp += 4;
-                    }
-                }
-                if (battleEnd3vs3.BrawlerTrophies >= 50 && battleEnd3vs3.BrawlerTrophies <= 99)
-                {
-                    if (message.battleResult == 0)
-                    {
-                        battleEnd3vs3.TrophiesReward = 8;
-                        battleEnd3vs3.TokensReward = 35;
-                        hero.AddTrophies(battleEnd3vs3.TrophiesReward);
-                        ohd.Avatar.AddTokens(battleEnd3vs3.TokensReward);
-                        ohd.Home.Exp += 8;
-                        ohd.Avatar.TrioWins += 1;
-                    }
-                    else
-                    {
-                        battleEnd3vs3.TrophiesReward = -1;
-                        ohd.Home.Exp += 4;
-                        hero.AddTrophies(battleEnd3vs3.TrophiesReward);
-                    }
-                }
-                if (battleEnd3vs3.BrawlerTrophies >= 100 && battleEnd3vs3.BrawlerTrophies <= 199)
-                {
-                    if (message.battleResult == 0)
-                    {
-                        battleEnd3vs3.TrophiesReward = 8;
-                        battleEnd3vs3.TokensReward = 35;
-                        hero.AddTrophies(battleEnd3vs3.TrophiesReward);
-                        ohd.Avatar.AddTokens(battleEnd3vs3.TokensReward);
-                        ohd.Avatar.TrioWins += 1;
-                        ohd.Home.Exp += 8;
-                    }
-                    else
-                    {
-                        battleEnd3vs3.TrophiesReward = -2;
-                        ohd.Home.Exp += 4;
-                        hero.AddTrophies(battleEnd3vs3.TrophiesReward);
-                    }
-                }
-                if (battleEnd3vs3.BrawlerTrophies >= 200 && battleEnd3vs3.BrawlerTrophies <= 299)
-                {
-                    if (message.battleResult == 0)
-                    {
-                        battleEnd3vs3.TrophiesReward = 8;
-                        battleEnd3vs3.TokensReward = 35;
-                        hero.AddTrophies(battleEnd3vs3.TrophiesReward);
-                        ohd.Avatar.AddTokens(battleEnd3vs3.TokensReward);
-                        ohd.Avatar.TrioWins += 1;
-                        ohd.Home.Exp += 8;
-                    }
-                    else
-                    {
-                        battleEnd3vs3.TrophiesReward = -3;
-                        ohd.Home.Exp += 4;
-                        hero.AddTrophies(battleEnd3vs3.TrophiesReward);
-                    }
-                }
-                if (battleEnd3vs3.BrawlerTrophies >= 300 && battleEnd3vs3.BrawlerTrophies <= 399)
-                {
-                    if (message.battleResult == 0)
-                    {
-                        battleEnd3vs3.TrophiesReward = 8;
-                        battleEnd3vs3.TokensReward = 35;
-                        hero.AddTrophies(battleEnd3vs3.TrophiesReward);
-                        ohd.Avatar.AddTokens(battleEnd3vs3.TokensReward);
-                        ohd.Avatar.TrioWins += 1;
-                        ohd.Home.Exp += 8;
-                    }
-                    else
-                    {
-                        battleEnd3vs3.TrophiesReward = -4;
-                        ohd.Home.Exp += 4;
-                        hero.AddTrophies(battleEnd3vs3.TrophiesReward);
-                    }
-                }
-                if (battleEnd3vs3.BrawlerTrophies >= 400 && battleEnd3vs3.BrawlerTrophies <= 499)
-                {
-                    if (message.battleResult == 0)
-                    {
-                        battleEnd3vs3.TrophiesReward = 8;
-                        battleEnd3vs3.TokensReward = 35;
-                        hero.AddTrophies(battleEnd3vs3.TrophiesReward);
-                        ohd.Avatar.AddTokens(battleEnd3vs3.TokensReward);
-                        ohd.Avatar.TrioWins += 1;
-                        ohd.Home.Exp += 8;
-                    }
-                    else
-                    {
-                        battleEnd3vs3.TrophiesReward = -5;
-                        ohd.Home.Exp += 4;
-                        hero.AddTrophies(battleEnd3vs3.TrophiesReward);
-                    }
-                }
-                if (battleEnd3vs3.BrawlerTrophies >= 500 && battleEnd3vs3.BrawlerTrophies <= 599)
-                {
-                    if (message.battleResult == 0)
-                    {
-                        battleEnd3vs3.TrophiesReward = 8;
-                        battleEnd3vs3.TokensReward = 35;
-                        hero.AddTrophies(battleEnd3vs3.TrophiesReward);
-                        ohd.Avatar.AddTokens(battleEnd3vs3.TokensReward);
-                        ohd.Avatar.TrioWins += 1;
-                        ohd.Home.Exp += 8;
-                    }
-                    else
-                    {
-                        battleEnd3vs3.TrophiesReward = -6;
-                        ohd.Home.Exp += 4;
-                        hero.AddTrophies(battleEnd3vs3.TrophiesReward);
-                    }
-                }
-                if (battleEnd3vs3.BrawlerTrophies >= 600 && battleEnd3vs3.BrawlerTrophies <= 699)
-                {
-                    if (message.battleResult == 0)
-                    {
-                        battleEnd3vs3.TrophiesReward = 8;
-                        battleEnd3vs3.TokensReward = 35;
-                        hero.AddTrophies(battleEnd3vs3.TrophiesReward);
-                        ohd.Avatar.AddTokens(battleEnd3vs3.TokensReward);
-                        ohd.Avatar.TrioWins += 1;
-                        ohd.Home.Exp += 8;
-                    }
-                    else
-                    {
-                        battleEnd3vs3.TrophiesReward = -7;
-                        ohd.Home.Exp += 4;
-                        hero.AddTrophies(battleEnd3vs3.TrophiesReward);
-                    }
-                }
-                if (battleEnd3vs3.BrawlerTrophies >= 700 && battleEnd3vs3.BrawlerTrophies <= 799)
-                {
-                    if (message.battleResult == 0)
-                    {
-                        battleEnd3vs3.TrophiesReward = 8;
-                        battleEnd3vs3.TokensReward = 35;
-                        hero.AddTrophies(battleEnd3vs3.TrophiesReward);
-                        ohd.Avatar.AddTokens(battleEnd3vs3.TokensReward);
-                        ohd.Avatar.TrioWins += 1;
-                        ohd.Home.Exp += 8;
-                    }
-                    else
-                    {
-                        battleEnd3vs3.TrophiesReward = -8;
-                        ohd.Home.Exp += 4;
-                        hero.AddTrophies(battleEnd3vs3.TrophiesReward);
-                    }
-                }
-                if (battleEnd3vs3.BrawlerTrophies >= 800 && battleEnd3vs3.BrawlerTrophies <= 899)
-                {
-                    if (message.battleResult == 0)
-                    {
-                        battleEnd3vs3.TrophiesReward = 7;
-                        battleEnd3vs3.TokensReward = 35;
-                        hero.AddTrophies(battleEnd3vs3.TrophiesReward);
-                        ohd.Avatar.AddTokens(battleEnd3vs3.TokensReward);
-                        ohd.Avatar.TrioWins += 1;
-                        ohd.Home.Exp += 8;
-                    }
-                    else
-                    {
-                        battleEnd3vs3.TrophiesReward = -9;
-                        ohd.Home.Exp += 4;
-                        hero.AddTrophies(battleEnd3vs3.TrophiesReward);
-                    }
-                }
-                if (battleEnd3vs3.BrawlerTrophies >= 900 && battleEnd3vs3.BrawlerTrophies <= 999)
-                {
-                    if (message.battleResult == 0)
-                    {
-                        battleEnd3vs3.TrophiesReward = 6;
-                        battleEnd3vs3.TokensReward = 35;
-                        hero.AddTrophies(battleEnd3vs3.TrophiesReward);
-                        ohd.Avatar.AddTokens(battleEnd3vs3.TokensReward);
-                        ohd.Avatar.TrioWins += 1;
-                        ohd.Home.Exp += 8;
-                    }
-                    else
-                    {
-                        battleEnd3vs3.TrophiesReward = -10;
-                        ohd.Home.Exp += 4;
-                        hero.AddTrophies(battleEnd3vs3.TrophiesReward);
-                    }
-                }
-                if (battleEnd3vs3.BrawlerTrophies >= 1000 && battleEnd3vs3.BrawlerTrophies <= 1099)
-                {
-                    if (message.battleResult == 0)
-                    {
-                        battleEnd3vs3.TrophiesReward = 5;
-                        battleEnd3vs3.TokensReward = 35;
-                        hero.AddTrophies(battleEnd3vs3.TrophiesReward);
-                        ohd.Avatar.AddTokens(battleEnd3vs3.TokensReward);
-                        ohd.Avatar.TrioWins += 1;
-                        ohd.Home.Exp += 8;
-                    }
-                    else
-                    {
-                        battleEnd3vs3.TrophiesReward = -11;
-                        ohd.Home.Exp += 4;
-                        hero.AddTrophies(battleEnd3vs3.TrophiesReward);
-                    }
-                }
-                if (battleEnd3vs3.BrawlerTrophies >= 1100 && battleEnd3vs3.BrawlerTrophies <= 1200)
-                {
-                    if (message.battleResult == 0)
-                    {
-                        battleEnd3vs3.TrophiesReward = 3;
-                        battleEnd3vs3.TokensReward = 35;
-                        hero.AddTrophies(battleEnd3vs3.TrophiesReward);
-                        ohd.Avatar.AddTokens(battleEnd3vs3.TokensReward);
-                        ohd.Avatar.TrioWins += 1;
-                        ohd.Home.Exp += 8;
-                    }
-                    else
-                    {
-                        battleEnd3vs3.TrophiesReward = -12;
-                        ohd.Home.Exp += 4;
-                        hero.AddTrophies(battleEnd3vs3.TrophiesReward);
-                    }
-                }
-            }
-            if (message.players == 10)
-            {
-                if (battleEndSolo.BrawlerTrophies >= 0 && battleEndSolo.BrawlerTrophies <= 49)
-                {
-                    if (message.battleResult == 1)
-                    {
-                        battleEndSolo.TrophiesReward = 10;
-                        battleEndSolo.TokensReward = 34;
-                        hero.AddTrophies(battleEndSolo.TrophiesReward);
-                        ohd.Avatar.AddTokens(battleEndSolo.TokensReward);
-                        ohd.Avatar.SoloWins += 1;
-                        ohd.Home.Exp += 15;
-                    }
-                    if (message.battleResult == 2)
-                    {
-                        battleEndSolo.TrophiesReward = 8;
-                        battleEndSolo.TokensReward = 28;
-                        hero.AddTrophies(battleEndSolo.TrophiesReward);
-                        ohd.Avatar.AddTokens(battleEndSolo.TokensReward);
-                        ohd.Home.Exp += 12;
-                    }
-                    if (message.battleResult == 3)
-                    {
-                        battleEndSolo.TrophiesReward = 7;
-                        battleEndSolo.TokensReward = 22;
-                        hero.AddTrophies(battleEndSolo.TrophiesReward);
-                        ohd.Avatar.AddTokens(battleEndSolo.TokensReward);
-                        ohd.Home.Exp += 9;
-                    }
-                    if (message.battleResult == 4)
-                    {
-                        battleEndSolo.TrophiesReward = 6;
-                        battleEndSolo.TokensReward = 16;
-                        hero.AddTrophies(battleEndSolo.TrophiesReward);
-                        ohd.Avatar.AddTokens(battleEndSolo.TokensReward);
-                        ohd.Home.Exp += 6;
-                    }
-                    if (message.battleResult == 5)
-                    {
-                        battleEndSolo.TrophiesReward = 4;
-                        battleEndSolo.TokensReward = 12;
-                        hero.AddTrophies(battleEndSolo.TrophiesReward);
-                        ohd.Avatar.AddTokens(battleEndSolo.TokensReward);
-                        ohd.Home.Exp += 5;
-                    }
-                    if (message.battleResult == 6)
-                    {
-                        battleEndSolo.TrophiesReward = 2;
-                        battleEndSolo.TokensReward = 8;
-                        hero.AddTrophies(battleEndSolo.TrophiesReward);
-                        ohd.Avatar.AddTokens(battleEndSolo.TokensReward);
-                        ohd.Home.Exp += 4;
-                    }
-                    if (message.battleResult == 7)
-                    {
-                        battleEndSolo.TrophiesReward = 2;
-                        battleEndSolo.TokensReward = 6;
-                        hero.AddTrophies(battleEndSolo.TrophiesReward);
-                        ohd.Avatar.AddTokens(battleEndSolo.TokensReward);
-                        ohd.Home.Exp += 3;
-                    }
-                    if (message.battleResult == 8)
-                    {
-                        battleEndSolo.TrophiesReward = 1;
-                        battleEndSolo.TokensReward = 4;
-                        hero.AddTrophies(battleEndSolo.TrophiesReward);
-                        ohd.Avatar.AddTokens(battleEndSolo.TokensReward);
-                        ohd.Home.Exp += 2;
-                    }
-                    if (message.battleResult == 9)
-                    {
-                        battleEndSolo.TrophiesReward = 0;
-                        battleEndSolo.TokensReward = 2;
-                        hero.AddTrophies(battleEndSolo.TrophiesReward);
-                        ohd.Avatar.AddTokens(battleEndSolo.TokensReward);
-                        ohd.Home.Exp += 1;
-                    }
-                    if (message.battleResult == 10)
-                    {
-                        battleEndSolo.TrophiesReward = 0;
-                        battleEndSolo.TokensReward = 0;
-                        hero.AddTrophies(battleEndSolo.TrophiesReward);
-                        ohd.Avatar.AddTokens(battleEndSolo.TokensReward);
-                    }
-                }
-                if (battleEndSolo.BrawlerTrophies >= 50 && battleEndSolo.BrawlerTrophies <= 99)
-                {
-                    if (message.battleResult == 1)
-                    {
-                        battleEndSolo.TrophiesReward = 10;
-                        battleEndSolo.TokensReward = 34;
-                        hero.AddTrophies(battleEndSolo.TrophiesReward);
-                        ohd.Avatar.AddTokens(battleEndSolo.TokensReward);
-                        ohd.Avatar.SoloWins += 1;
-                        ohd.Home.Exp += 15;
-                    }
-                    if (message.battleResult == 2)
-                    {
-                        battleEndSolo.TrophiesReward = 8;
-                        battleEndSolo.TokensReward = 28;
-                        hero.AddTrophies(battleEndSolo.TrophiesReward);
-                        ohd.Avatar.AddTokens(battleEndSolo.TokensReward);
-                        ohd.Home.Exp += 12;
-                    }
-                    if (message.battleResult == 3)
-                    {
-                        battleEndSolo.TrophiesReward = 7;
-                        battleEndSolo.TokensReward = 22;
-                        hero.AddTrophies(battleEndSolo.TrophiesReward);
-                        ohd.Avatar.AddTokens(battleEndSolo.TokensReward);
-                        ohd.Home.Exp += 9;
-                    }
-                    if (message.battleResult == 4)
-                    {
-                        battleEndSolo.TrophiesReward = 6;
-                        battleEndSolo.TokensReward = 16;
-                        hero.AddTrophies(battleEndSolo.TrophiesReward);
-                        ohd.Avatar.AddTokens(battleEndSolo.TokensReward);
-                        ohd.Home.Exp += 6;
-                    }
-                    if (message.battleResult == 5)
-                    {
-                        battleEndSolo.TrophiesReward = 3;
-                        battleEndSolo.TokensReward = 12;
-                        hero.AddTrophies(battleEndSolo.TrophiesReward);
-                        ohd.Avatar.AddTokens(battleEndSolo.TokensReward);
-                        ohd.Home.Exp += 5;
-                    }
-                    if (message.battleResult == 6)
-                    {
-                        battleEndSolo.TrophiesReward = 2;
-                        battleEndSolo.TokensReward = 8;
-                        hero.AddTrophies(battleEndSolo.TrophiesReward);
-                        ohd.Avatar.AddTokens(battleEndSolo.TokensReward);
-                        ohd.Home.Exp += 4;
-                    }
-                    if (message.battleResult == 7)
-                    {
-                        battleEndSolo.TrophiesReward = 2;
-                        battleEndSolo.TokensReward = 6;
-                        hero.AddTrophies(battleEndSolo.TrophiesReward);
-                        ohd.Avatar.AddTokens(battleEndSolo.TokensReward);
-                        ohd.Home.Exp += 3;
-                    }
-                    if (message.battleResult == 8)
-                    {
-                        battleEndSolo.TrophiesReward = 0;
-                        battleEndSolo.TokensReward = 4;
-                        hero.AddTrophies(battleEndSolo.TrophiesReward);
-                        ohd.Avatar.AddTokens(battleEndSolo.TokensReward);
-                        ohd.Home.Exp += 2;
-                    }
-                    if (message.battleResult == 9)
-                    {
-                        battleEndSolo.TrophiesReward = -1;
-                        battleEndSolo.TokensReward = 2;
-                        hero.AddTrophies(battleEndSolo.TrophiesReward);
-                        ohd.Avatar.AddTokens(battleEndSolo.TokensReward);
-                        ohd.Home.Exp += 1;
-                    }
-                    if (message.battleResult == 10)
-                    {
-                        battleEndSolo.TrophiesReward = -2;
-                        hero.AddTrophies(battleEndSolo.TrophiesReward);
-                    }
-                }
-                if (battleEndSolo.BrawlerTrophies >= 100 && battleEndSolo.BrawlerTrophies <= 199)
-                {
-                    if (message.battleResult == 1)
-                    {
-                        battleEndSolo.TrophiesReward = 10;
-                        battleEndSolo.TokensReward = 34;
-                        hero.AddTrophies(battleEndSolo.TrophiesReward);
-                        ohd.Avatar.AddTokens(battleEndSolo.TokensReward);
-                        ohd.Avatar.SoloWins += 1;
-                        ohd.Home.Exp += 15;
-                    }
-                    if (message.battleResult == 2)
-                    {
-                        battleEndSolo.TrophiesReward = 8;
-                        battleEndSolo.TokensReward = 28;
-                        hero.AddTrophies(battleEndSolo.TrophiesReward);
-                        ohd.Avatar.AddTokens(battleEndSolo.TokensReward);
-                        ohd.Home.Exp += 12;
-                    }
-                    if (message.battleResult == 3)
-                    {
-                        battleEndSolo.TrophiesReward = 7;
-                        battleEndSolo.TokensReward = 22;
-                        hero.AddTrophies(battleEndSolo.TrophiesReward);
-                        ohd.Avatar.AddTokens(battleEndSolo.TokensReward);
-                        ohd.Home.Exp += 9;
-                    }
-                    if (message.battleResult == 4)
-                    {
-                        battleEndSolo.TrophiesReward = 6;
-                        battleEndSolo.TokensReward = 16;
-                        hero.AddTrophies(battleEndSolo.TrophiesReward);
-                        ohd.Avatar.AddTokens(battleEndSolo.TokensReward);
-                        ohd.Home.Exp += 6;
-                    }
-                    if (message.battleResult == 5)
-                    {
-                        battleEndSolo.TrophiesReward = 3;
-                        battleEndSolo.TokensReward = 12;
-                        hero.AddTrophies(battleEndSolo.TrophiesReward);
-                        ohd.Avatar.AddTokens(battleEndSolo.TokensReward);
-                        ohd.Home.Exp += 5;
-                    }
-                    if (message.battleResult == 6)
-                    {
-                        battleEndSolo.TrophiesReward = 1;
-                        battleEndSolo.TokensReward = 8;
-                        hero.AddTrophies(battleEndSolo.TrophiesReward);
-                        ohd.Avatar.AddTokens(battleEndSolo.TokensReward);
-                        ohd.Home.Exp += 4;
-                    }
-                    if (message.battleResult == 7)
-                    {
-                        battleEndSolo.TrophiesReward = 0;
-                        battleEndSolo.TokensReward = 6;
-                        hero.AddTrophies(battleEndSolo.TrophiesReward);
-                        ohd.Avatar.AddTokens(battleEndSolo.TokensReward);
-                        ohd.Home.Exp += 3;
-                    }
-                    if (message.battleResult == 8)
-                    {
-                        battleEndSolo.TrophiesReward = -1;
-                        battleEndSolo.TokensReward = 4;
-                        hero.AddTrophies(battleEndSolo.TrophiesReward);
-                        ohd.Avatar.AddTokens(battleEndSolo.TokensReward);
-                        ohd.Home.Exp += 2;
-                    }
-                    if (message.battleResult == 9)
-                    {
-                        battleEndSolo.TrophiesReward = -2;
-                        battleEndSolo.TokensReward = 2;
-                        hero.AddTrophies(battleEndSolo.TrophiesReward);
-                        ohd.Avatar.AddTokens(battleEndSolo.TokensReward);
-                        ohd.Home.Exp += 1;
-                    }
-                    if (message.battleResult == 10)
-                    {
-                        battleEndSolo.TrophiesReward = -2;
-                        hero.AddTrophies(battleEndSolo.TrophiesReward);
-                    }
-                }
-            }
-            if (ohd.Avatar.IsPremium == true && message.players == 6)
-            {
-                battleEnd3vs3.TrophiesReward += 4;
-                battleEnd3vs3.TokensReward += 17;
-                hero.AddTrophies(battleEnd3vs3.TrophiesReward);
-                ohd.Avatar.AddTokens(battleEnd3vs3.TokensReward);
-            }
-            if (ohd.Avatar.IsPremium == true && message.players == 10)
-            {
-                battleEndSolo.TrophiesReward += 6;
-                battleEndSolo.TokensReward += 20;
-                hero.AddTrophies(battleEndSolo.TrophiesReward);
-                ohd.Avatar.AddTokens(battleEndSolo.TokensReward);
-            }
-            if (message.players == 10)
-            {
-                Connection.Send(battleEndSolo);
-            }
-            if (message.players == 6)
-            {
-                Connection.Send(battleEnd3vs3);
-            }
+            // if (message.players == 6)
+            // {
+            //     if (battleEnd3vs3.BrawlerTrophies >= 0 && battleEnd3vs3.BrawlerTrophies <= 49)
+            //     {
+            //         if (message.battleResult == 0)
+            //         {
+            //             battleEnd3vs3.TrophiesReward = 8;
+            //             battleEnd3vs3.TokensReward = 35;
+            //             hero.AddTrophies(battleEnd3vs3.TrophiesReward);
+            //             ohd.Avatar.AddTokens(battleEnd3vs3.TokensReward);
+            //             ohd.Home.Exp += 8;
+            //             ohd.Avatar.TrioWins += 1;
+            //         }
+            //         else
+            //         {
+            //             battleEnd3vs3.TrophiesReward = 0;
+            //             ohd.Home.Exp += 4;
+            //         }
+            //     }
+            //     if (battleEnd3vs3.BrawlerTrophies >= 50 && battleEnd3vs3.BrawlerTrophies <= 99)
+            //     {
+            //         if (message.battleResult == 0)
+            //         {
+            //             battleEnd3vs3.TrophiesReward = 8;
+            //             battleEnd3vs3.TokensReward = 35;
+            //             hero.AddTrophies(battleEnd3vs3.TrophiesReward);
+            //             ohd.Avatar.AddTokens(battleEnd3vs3.TokensReward);
+            //             ohd.Home.Exp += 8;
+            //             ohd.Avatar.TrioWins += 1;
+            //         }
+            //         else
+            //         {
+            //             battleEnd3vs3.TrophiesReward = -1;
+            //             ohd.Home.Exp += 4;
+            //             hero.AddTrophies(battleEnd3vs3.TrophiesReward);
+            //         }
+            //     }
+            //     if (battleEnd3vs3.BrawlerTrophies >= 100 && battleEnd3vs3.BrawlerTrophies <= 199)
+            //     {
+            //         if (message.battleResult == 0)
+            //         {
+            //             battleEnd3vs3.TrophiesReward = 8;
+            //             battleEnd3vs3.TokensReward = 35;
+            //             hero.AddTrophies(battleEnd3vs3.TrophiesReward);
+            //             ohd.Avatar.AddTokens(battleEnd3vs3.TokensReward);
+            //             ohd.Avatar.TrioWins += 1;
+            //             ohd.Home.Exp += 8;
+            //         }
+            //         else
+            //         {
+            //             battleEnd3vs3.TrophiesReward = -2;
+            //             ohd.Home.Exp += 4;
+            //             hero.AddTrophies(battleEnd3vs3.TrophiesReward);
+            //         }
+            //     }
+            //     if (battleEnd3vs3.BrawlerTrophies >= 200 && battleEnd3vs3.BrawlerTrophies <= 299)
+            //     {
+            //         if (message.battleResult == 0)
+            //         {
+            //             battleEnd3vs3.TrophiesReward = 8;
+            //             battleEnd3vs3.TokensReward = 35;
+            //             hero.AddTrophies(battleEnd3vs3.TrophiesReward);
+            //             ohd.Avatar.AddTokens(battleEnd3vs3.TokensReward);
+            //             ohd.Avatar.TrioWins += 1;
+            //             ohd.Home.Exp += 8;
+            //         }
+            //         else
+            //         {
+            //             battleEnd3vs3.TrophiesReward = -3;
+            //             ohd.Home.Exp += 4;
+            //             hero.AddTrophies(battleEnd3vs3.TrophiesReward);
+            //         }
+            //     }
+            //     if (battleEnd3vs3.BrawlerTrophies >= 300 && battleEnd3vs3.BrawlerTrophies <= 399)
+            //     {
+            //         if (message.battleResult == 0)
+            //         {
+            //             battleEnd3vs3.TrophiesReward = 8;
+            //             battleEnd3vs3.TokensReward = 35;
+            //             hero.AddTrophies(battleEnd3vs3.TrophiesReward);
+            //             ohd.Avatar.AddTokens(battleEnd3vs3.TokensReward);
+            //             ohd.Avatar.TrioWins += 1;
+            //             ohd.Home.Exp += 8;
+            //         }
+            //         else
+            //         {
+            //             battleEnd3vs3.TrophiesReward = -4;
+            //             ohd.Home.Exp += 4;
+            //             hero.AddTrophies(battleEnd3vs3.TrophiesReward);
+            //         }
+            //     }
+            //     if (battleEnd3vs3.BrawlerTrophies >= 400 && battleEnd3vs3.BrawlerTrophies <= 499)
+            //     {
+            //         if (message.battleResult == 0)
+            //         {
+            //             battleEnd3vs3.TrophiesReward = 8;
+            //             battleEnd3vs3.TokensReward = 35;
+            //             hero.AddTrophies(battleEnd3vs3.TrophiesReward);
+            //             ohd.Avatar.AddTokens(battleEnd3vs3.TokensReward);
+            //             ohd.Avatar.TrioWins += 1;
+            //             ohd.Home.Exp += 8;
+            //         }
+            //         else
+            //         {
+            //             battleEnd3vs3.TrophiesReward = -5;
+            //             ohd.Home.Exp += 4;
+            //             hero.AddTrophies(battleEnd3vs3.TrophiesReward);
+            //         }
+            //     }
+            //     if (battleEnd3vs3.BrawlerTrophies >= 500 && battleEnd3vs3.BrawlerTrophies <= 599)
+            //     {
+            //         if (message.battleResult == 0)
+            //         {
+            //             battleEnd3vs3.TrophiesReward = 8;
+            //             battleEnd3vs3.TokensReward = 35;
+            //             hero.AddTrophies(battleEnd3vs3.TrophiesReward);
+            //             ohd.Avatar.AddTokens(battleEnd3vs3.TokensReward);
+            //             ohd.Avatar.TrioWins += 1;
+            //             ohd.Home.Exp += 8;
+            //         }
+            //         else
+            //         {
+            //             battleEnd3vs3.TrophiesReward = -6;
+            //             ohd.Home.Exp += 4;
+            //             hero.AddTrophies(battleEnd3vs3.TrophiesReward);
+            //         }
+            //     }
+            //     if (battleEnd3vs3.BrawlerTrophies >= 600 && battleEnd3vs3.BrawlerTrophies <= 699)
+            //     {
+            //         if (message.battleResult == 0)
+            //         {
+            //             battleEnd3vs3.TrophiesReward = 8;
+            //             battleEnd3vs3.TokensReward = 35;
+            //             hero.AddTrophies(battleEnd3vs3.TrophiesReward);
+            //             ohd.Avatar.AddTokens(battleEnd3vs3.TokensReward);
+            //             ohd.Avatar.TrioWins += 1;
+            //             ohd.Home.Exp += 8;
+            //         }
+            //         else
+            //         {
+            //             battleEnd3vs3.TrophiesReward = -7;
+            //             ohd.Home.Exp += 4;
+            //             hero.AddTrophies(battleEnd3vs3.TrophiesReward);
+            //         }
+            //     }
+            //     if (battleEnd3vs3.BrawlerTrophies >= 700 && battleEnd3vs3.BrawlerTrophies <= 799)
+            //     {
+            //         if (message.battleResult == 0)
+            //         {
+            //             battleEnd3vs3.TrophiesReward = 8;
+            //             battleEnd3vs3.TokensReward = 35;
+            //             hero.AddTrophies(battleEnd3vs3.TrophiesReward);
+            //             ohd.Avatar.AddTokens(battleEnd3vs3.TokensReward);
+            //             ohd.Avatar.TrioWins += 1;
+            //             ohd.Home.Exp += 8;
+            //         }
+            //         else
+            //         {
+            //             battleEnd3vs3.TrophiesReward = -8;
+            //             ohd.Home.Exp += 4;
+            //             hero.AddTrophies(battleEnd3vs3.TrophiesReward);
+            //         }
+            //     }
+            //     if (battleEnd3vs3.BrawlerTrophies >= 800 && battleEnd3vs3.BrawlerTrophies <= 899)
+            //     {
+            //         if (message.battleResult == 0)
+            //         {
+            //             battleEnd3vs3.TrophiesReward = 7;
+            //             battleEnd3vs3.TokensReward = 35;
+            //             hero.AddTrophies(battleEnd3vs3.TrophiesReward);
+            //             ohd.Avatar.AddTokens(battleEnd3vs3.TokensReward);
+            //             ohd.Avatar.TrioWins += 1;
+            //             ohd.Home.Exp += 8;
+            //         }
+            //         else
+            //         {
+            //             battleEnd3vs3.TrophiesReward = -9;
+            //             ohd.Home.Exp += 4;
+            //             hero.AddTrophies(battleEnd3vs3.TrophiesReward);
+            //         }
+            //     }
+            //     if (battleEnd3vs3.BrawlerTrophies >= 900 && battleEnd3vs3.BrawlerTrophies <= 999)
+            //     {
+            //         if (message.battleResult == 0)
+            //         {
+            //             battleEnd3vs3.TrophiesReward = 6;
+            //             battleEnd3vs3.TokensReward = 35;
+            //             hero.AddTrophies(battleEnd3vs3.TrophiesReward);
+            //             ohd.Avatar.AddTokens(battleEnd3vs3.TokensReward);
+            //             ohd.Avatar.TrioWins += 1;
+            //             ohd.Home.Exp += 8;
+            //         }
+            //         else
+            //         {
+            //             battleEnd3vs3.TrophiesReward = -10;
+            //             ohd.Home.Exp += 4;
+            //             hero.AddTrophies(battleEnd3vs3.TrophiesReward);
+            //         }
+            //     }
+            //     if (battleEnd3vs3.BrawlerTrophies >= 1000 && battleEnd3vs3.BrawlerTrophies <= 1099)
+            //     {
+            //         if (message.battleResult == 0)
+            //         {
+            //             battleEnd3vs3.TrophiesReward = 5;
+            //             battleEnd3vs3.TokensReward = 35;
+            //             hero.AddTrophies(battleEnd3vs3.TrophiesReward);
+            //             ohd.Avatar.AddTokens(battleEnd3vs3.TokensReward);
+            //             ohd.Avatar.TrioWins += 1;
+            //             ohd.Home.Exp += 8;
+            //         }
+            //         else
+            //         {
+            //             battleEnd3vs3.TrophiesReward = -11;
+            //             ohd.Home.Exp += 4;
+            //             hero.AddTrophies(battleEnd3vs3.TrophiesReward);
+            //         }
+            //     }
+            //     if (battleEnd3vs3.BrawlerTrophies >= 1100 && battleEnd3vs3.BrawlerTrophies <= 1200)
+            //     {
+            //         if (message.battleResult == 0)
+            //         {
+            //             battleEnd3vs3.TrophiesReward = 3;
+            //             battleEnd3vs3.TokensReward = 35;
+            //             hero.AddTrophies(battleEnd3vs3.TrophiesReward);
+            //             ohd.Avatar.AddTokens(battleEnd3vs3.TokensReward);
+            //             ohd.Avatar.TrioWins += 1;
+            //             ohd.Home.Exp += 8;
+            //         }
+            //         else
+            //         {
+            //             battleEnd3vs3.TrophiesReward = -12;
+            //             ohd.Home.Exp += 4;
+            //             hero.AddTrophies(battleEnd3vs3.TrophiesReward);
+            //         }
+            //     }
+            // }
+            // if (message.players == 10)
+            // {
+            //     if (battleEndSolo.BrawlerTrophies >= 0 && battleEndSolo.BrawlerTrophies <= 49)
+            //     {
+            //         if (message.battleResult == 1)
+            //         {
+            //             battleEndSolo.TrophiesReward = 10;
+            //             battleEndSolo.TokensReward = 34;
+            //             hero.AddTrophies(battleEndSolo.TrophiesReward);
+            //             ohd.Avatar.AddTokens(battleEndSolo.TokensReward);
+            //             ohd.Avatar.SoloWins += 1;
+            //             ohd.Home.Exp += 15;
+            //         }
+            //         if (message.battleResult == 2)
+            //         {
+            //             battleEndSolo.TrophiesReward = 8;
+            //             battleEndSolo.TokensReward = 28;
+            //             hero.AddTrophies(battleEndSolo.TrophiesReward);
+            //             ohd.Avatar.AddTokens(battleEndSolo.TokensReward);
+            //             ohd.Home.Exp += 12;
+            //         }
+            //         if (message.battleResult == 3)
+            //         {
+            //             battleEndSolo.TrophiesReward = 7;
+            //             battleEndSolo.TokensReward = 22;
+            //             hero.AddTrophies(battleEndSolo.TrophiesReward);
+            //             ohd.Avatar.AddTokens(battleEndSolo.TokensReward);
+            //             ohd.Home.Exp += 9;
+            //         }
+            //         if (message.battleResult == 4)
+            //         {
+            //             battleEndSolo.TrophiesReward = 6;
+            //             battleEndSolo.TokensReward = 16;
+            //             hero.AddTrophies(battleEndSolo.TrophiesReward);
+            //             ohd.Avatar.AddTokens(battleEndSolo.TokensReward);
+            //             ohd.Home.Exp += 6;
+            //         }
+            //         if (message.battleResult == 5)
+            //         {
+            //             battleEndSolo.TrophiesReward = 4;
+            //             battleEndSolo.TokensReward = 12;
+            //             hero.AddTrophies(battleEndSolo.TrophiesReward);
+            //             ohd.Avatar.AddTokens(battleEndSolo.TokensReward);
+            //             ohd.Home.Exp += 5;
+            //         }
+            //         if (message.battleResult == 6)
+            //         {
+            //             battleEndSolo.TrophiesReward = 2;
+            //             battleEndSolo.TokensReward = 8;
+            //             hero.AddTrophies(battleEndSolo.TrophiesReward);
+            //             ohd.Avatar.AddTokens(battleEndSolo.TokensReward);
+            //             ohd.Home.Exp += 4;
+            //         }
+            //         if (message.battleResult == 7)
+            //         {
+            //             battleEndSolo.TrophiesReward = 2;
+            //             battleEndSolo.TokensReward = 6;
+            //             hero.AddTrophies(battleEndSolo.TrophiesReward);
+            //             ohd.Avatar.AddTokens(battleEndSolo.TokensReward);
+            //             ohd.Home.Exp += 3;
+            //         }
+            //         if (message.battleResult == 8)
+            //         {
+            //             battleEndSolo.TrophiesReward = 1;
+            //             battleEndSolo.TokensReward = 4;
+            //             hero.AddTrophies(battleEndSolo.TrophiesReward);
+            //             ohd.Avatar.AddTokens(battleEndSolo.TokensReward);
+            //             ohd.Home.Exp += 2;
+            //         }
+            //         if (message.battleResult == 9)
+            //         {
+            //             battleEndSolo.TrophiesReward = 0;
+            //             battleEndSolo.TokensReward = 2;
+            //             hero.AddTrophies(battleEndSolo.TrophiesReward);
+            //             ohd.Avatar.AddTokens(battleEndSolo.TokensReward);
+            //             ohd.Home.Exp += 1;
+            //         }
+            //         if (message.battleResult == 10)
+            //         {
+            //             battleEndSolo.TrophiesReward = 0;
+            //             battleEndSolo.TokensReward = 0;
+            //             hero.AddTrophies(battleEndSolo.TrophiesReward);
+            //             ohd.Avatar.AddTokens(battleEndSolo.TokensReward);
+            //         }
+            //     }
+            //     if (battleEndSolo.BrawlerTrophies >= 50 && battleEndSolo.BrawlerTrophies <= 99)
+            //     {
+            //         if (message.battleResult == 1)
+            //         {
+            //             battleEndSolo.TrophiesReward = 10;
+            //             battleEndSolo.TokensReward = 34;
+            //             hero.AddTrophies(battleEndSolo.TrophiesReward);
+            //             ohd.Avatar.AddTokens(battleEndSolo.TokensReward);
+            //             ohd.Avatar.SoloWins += 1;
+            //             ohd.Home.Exp += 15;
+            //         }
+            //         if (message.battleResult == 2)
+            //         {
+            //             battleEndSolo.TrophiesReward = 8;
+            //             battleEndSolo.TokensReward = 28;
+            //             hero.AddTrophies(battleEndSolo.TrophiesReward);
+            //             ohd.Avatar.AddTokens(battleEndSolo.TokensReward);
+            //             ohd.Home.Exp += 12;
+            //         }
+            //         if (message.battleResult == 3)
+            //         {
+            //             battleEndSolo.TrophiesReward = 7;
+            //             battleEndSolo.TokensReward = 22;
+            //             hero.AddTrophies(battleEndSolo.TrophiesReward);
+            //             ohd.Avatar.AddTokens(battleEndSolo.TokensReward);
+            //             ohd.Home.Exp += 9;
+            //         }
+            //         if (message.battleResult == 4)
+            //         {
+            //             battleEndSolo.TrophiesReward = 6;
+            //             battleEndSolo.TokensReward = 16;
+            //             hero.AddTrophies(battleEndSolo.TrophiesReward);
+            //             ohd.Avatar.AddTokens(battleEndSolo.TokensReward);
+            //             ohd.Home.Exp += 6;
+            //         }
+            //         if (message.battleResult == 5)
+            //         {
+            //             battleEndSolo.TrophiesReward = 3;
+            //             battleEndSolo.TokensReward = 12;
+            //             hero.AddTrophies(battleEndSolo.TrophiesReward);
+            //             ohd.Avatar.AddTokens(battleEndSolo.TokensReward);
+            //             ohd.Home.Exp += 5;
+            //         }
+            //         if (message.battleResult == 6)
+            //         {
+            //             battleEndSolo.TrophiesReward = 2;
+            //             battleEndSolo.TokensReward = 8;
+            //             hero.AddTrophies(battleEndSolo.TrophiesReward);
+            //             ohd.Avatar.AddTokens(battleEndSolo.TokensReward);
+            //             ohd.Home.Exp += 4;
+            //         }
+            //         if (message.battleResult == 7)
+            //         {
+            //             battleEndSolo.TrophiesReward = 2;
+            //             battleEndSolo.TokensReward = 6;
+            //             hero.AddTrophies(battleEndSolo.TrophiesReward);
+            //             ohd.Avatar.AddTokens(battleEndSolo.TokensReward);
+            //             ohd.Home.Exp += 3;
+            //         }
+            //         if (message.battleResult == 8)
+            //         {
+            //             battleEndSolo.TrophiesReward = 0;
+            //             battleEndSolo.TokensReward = 4;
+            //             hero.AddTrophies(battleEndSolo.TrophiesReward);
+            //             ohd.Avatar.AddTokens(battleEndSolo.TokensReward);
+            //             ohd.Home.Exp += 2;
+            //         }
+            //         if (message.battleResult == 9)
+            //         {
+            //             battleEndSolo.TrophiesReward = -1;
+            //             battleEndSolo.TokensReward = 2;
+            //             hero.AddTrophies(battleEndSolo.TrophiesReward);
+            //             ohd.Avatar.AddTokens(battleEndSolo.TokensReward);
+            //             ohd.Home.Exp += 1;
+            //         }
+            //         if (message.battleResult == 10)
+            //         {
+            //             battleEndSolo.TrophiesReward = -2;
+            //             hero.AddTrophies(battleEndSolo.TrophiesReward);
+            //         }
+            //     }
+            //     if (battleEndSolo.BrawlerTrophies >= 100 && battleEndSolo.BrawlerTrophies <= 199)
+            //     {
+            //         if (message.battleResult == 1)
+            //         {
+            //             battleEndSolo.TrophiesReward = 10;
+            //             battleEndSolo.TokensReward = 34;
+            //             hero.AddTrophies(battleEndSolo.TrophiesReward);
+            //             ohd.Avatar.AddTokens(battleEndSolo.TokensReward);
+            //             ohd.Avatar.SoloWins += 1;
+            //             ohd.Home.Exp += 15;
+            //         }
+            //         if (message.battleResult == 2)
+            //         {
+            //             battleEndSolo.TrophiesReward = 8;
+            //             battleEndSolo.TokensReward = 28;
+            //             hero.AddTrophies(battleEndSolo.TrophiesReward);
+            //             ohd.Avatar.AddTokens(battleEndSolo.TokensReward);
+            //             ohd.Home.Exp += 12;
+            //         }
+            //         if (message.battleResult == 3)
+            //         {
+            //             battleEndSolo.TrophiesReward = 7;
+            //             battleEndSolo.TokensReward = 22;
+            //             hero.AddTrophies(battleEndSolo.TrophiesReward);
+            //             ohd.Avatar.AddTokens(battleEndSolo.TokensReward);
+            //             ohd.Home.Exp += 9;
+            //         }
+            //         if (message.battleResult == 4)
+            //         {
+            //             battleEndSolo.TrophiesReward = 6;
+            //             battleEndSolo.TokensReward = 16;
+            //             hero.AddTrophies(battleEndSolo.TrophiesReward);
+            //             ohd.Avatar.AddTokens(battleEndSolo.TokensReward);
+            //             ohd.Home.Exp += 6;
+            //         }
+            //         if (message.battleResult == 5)
+            //         {
+            //             battleEndSolo.TrophiesReward = 3;
+            //             battleEndSolo.TokensReward = 12;
+            //             hero.AddTrophies(battleEndSolo.TrophiesReward);
+            //             ohd.Avatar.AddTokens(battleEndSolo.TokensReward);
+            //             ohd.Home.Exp += 5;
+            //         }
+            //         if (message.battleResult == 6)
+            //         {
+            //             battleEndSolo.TrophiesReward = 1;
+            //             battleEndSolo.TokensReward = 8;
+            //             hero.AddTrophies(battleEndSolo.TrophiesReward);
+            //             ohd.Avatar.AddTokens(battleEndSolo.TokensReward);
+            //             ohd.Home.Exp += 4;
+            //         }
+            //         if (message.battleResult == 7)
+            //         {
+            //             battleEndSolo.TrophiesReward = 0;
+            //             battleEndSolo.TokensReward = 6;
+            //             hero.AddTrophies(battleEndSolo.TrophiesReward);
+            //             ohd.Avatar.AddTokens(battleEndSolo.TokensReward);
+            //             ohd.Home.Exp += 3;
+            //         }
+            //         if (message.battleResult == 8)
+            //         {
+            //             battleEndSolo.TrophiesReward = -1;
+            //             battleEndSolo.TokensReward = 4;
+            //             hero.AddTrophies(battleEndSolo.TrophiesReward);
+            //             ohd.Avatar.AddTokens(battleEndSolo.TokensReward);
+            //             ohd.Home.Exp += 2;
+            //         }
+            //         if (message.battleResult == 9)
+            //         {
+            //             battleEndSolo.TrophiesReward = -2;
+            //             battleEndSolo.TokensReward = 2;
+            //             hero.AddTrophies(battleEndSolo.TrophiesReward);
+            //             ohd.Avatar.AddTokens(battleEndSolo.TokensReward);
+            //             ohd.Home.Exp += 1;
+            //         }
+            //         if (message.battleResult == 10)
+            //         {
+            //             battleEndSolo.TrophiesReward = -2;
+            //             hero.AddTrophies(battleEndSolo.TrophiesReward);
+            //         }
+            //     }
+            // }
+            // if (ohd.Avatar.IsPremium == true && message.players == 6)
+            // {
+            //     battleEnd3vs3.TrophiesReward += 4;
+            //     battleEnd3vs3.TokensReward += 17;
+            //     hero.AddTrophies(battleEnd3vs3.TrophiesReward);
+            //     ohd.Avatar.AddTokens(battleEnd3vs3.TokensReward);
+            // }
+            // if (ohd.Avatar.IsPremium == true && message.players == 10)
+            // {
+            //     battleEndSolo.TrophiesReward += 6;
+            //     battleEndSolo.TokensReward += 20;
+            //     hero.AddTrophies(battleEndSolo.TrophiesReward);
+            //     ohd.Avatar.AddTokens(battleEndSolo.TokensReward);
+            // }
+            // if (message.players == 10)
+            // {
+            //     Connection.Send(battleEndSolo);
+            // }
+            // if (message.players == 6)
+            // {
+            //     Connection.Send(battleEnd3vs3);
+            // }
+            ;
         }
 
         private void TeamSetLocationReceived(TeamSetLocationMessage message)
