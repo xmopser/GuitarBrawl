@@ -3,7 +3,7 @@ Private brawl stars server with PvP Battles based on RoyaleBrawl ([by xeondev](h
 
 ![Screenshot](https://github.com/xmopser/GuitarBrawl/blob/main/screenshots/Screenshot_2025-01-26-01-12-48-136_com.miokiru.pianobrawl.jpg)
 
-## [DOWNLOAD CLIENT](https://drive.google.com/file/d/1QO_INK8OA38KslJ1Q1kuQ3-DIRRfsxX4/view?usp=sharing)
+## [DOWNLOAD CLIENT](https://drive.google.com/file/d/1pZ2p6oQYDy1TWe5joe6C296Wj1EufDe9/view?usp=sharing)
 
 ### Setup
 ##### Compiling
@@ -19,7 +19,7 @@ You need to setup mysql server and import `database.sql` file from this reposito
 - Set your ip in `config.json` -> `udp_host`
 - Set your mysql database name, password, and username in `config.json`
 ##### Client
-- Download apk here: [link](https://drive.google.com/file/d/1QO_INK8OA38KslJ1Q1kuQ3-DIRRfsxX4/view?usp=sharing)
+- Download apk here: [link](https://drive.google.com/file/d/1pZ2p6oQYDy1TWe5joe6C296Wj1EufDe9/view?usp=sharing)
 - Open this file: `lib/armeabi-v7a/libreversed.script.so` and put your ip address and port in `HostPatcher`
 - Compile apk and play enjoy playing this server.
 
