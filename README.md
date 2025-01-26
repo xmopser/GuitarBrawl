@@ -16,7 +16,6 @@ Private brawl stars server with PvP Battles based on RoyaleBrawl v27.269 ([by xe
 - Improvements for bots (random names, use ults, use of all characters).
 - Possible to play on all characters (except Bea, Bibi, Rosa, Tick).
 - New game mechanics on ohline battles (heal, correct destruction of walls).
-- General improvements to lobby, battles, database, sockets.
 - And more...
 
 ### Setup
