@@ -39,3 +39,6 @@ You need to setup mysql server and import `database.sql` file from this reposito
 ### Requirements
 - dotnet 6.0
 - mysql (on windows I prefer *XAMPP* with *phpmyadmin*)
+
+
+### good luck using it)
